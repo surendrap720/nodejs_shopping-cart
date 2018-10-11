@@ -4,11 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressHbs = require('express-handlebars');
+var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+mongoose.connect('mongodb://root:root123@ds229373.mlab.com:29373/shoppingcart', { useNewUrlParser: true}, function(err){
+
+  if(err){
+    console.log(err);
+  } else {
+    console.log('Connected to the database');
+  }
+});
 
 // view engine setup
 app.engine('.hbs',expressHbs({defaultLayout:'layout',extname:'.hbs'}));
